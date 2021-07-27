@@ -1,5 +1,6 @@
 const fs = require('fs');
 const common = require('../../src/common');
+const path = require('path');
 const uninstall = require('../../src/actions/uninstall');
 
 jest.mock('fs');
@@ -32,7 +33,7 @@ describe('uninstall()', () => {
 
     uninstall(callback);
 
-    expect(fs.unlinkSync).toHaveBeenCalledWith('bin/command');
+    expect(fs.unlinkSync).toHaveBeenCalledWith(path.join('bin', 'command'));
   });
 
   it('should call callback on success', () => {

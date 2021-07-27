@@ -1,6 +1,7 @@
 const fs = require('fs');
 const childProcess = require('child_process');
 const common = require('../src/common');
+const path = require('path');
 
 jest.mock('fs');
 jest.mock('child_process');
@@ -21,11 +22,11 @@ describe('common', () => {
     });
 
     it('should get binaries path from `npm bin`', () => {
-      childProcess.exec.mockImplementationOnce((_cmd, cb) => cb(null, '/usr/local/bin'));
+      childProcess.exec.mockImplementationOnce((_cmd, cb) => cb(null, path.sep + path.join('usr', 'local', 'bin')));
 
       common.getInstallationPath(callback);
 
-      expect(callback).toHaveBeenCalledWith(null, '/usr/local/bin');
+      expect(callback).toHaveBeenCalledWith(null, path.sep + path.join('usr', 'local', 'bin'));
     });
 
     it('should get binaries path from env', () => {
@@ -35,7 +36,7 @@ describe('common', () => {
 
       common.getInstallationPath(callback);
 
-      expect(callback).toHaveBeenCalledWith(null, '/usr/local/bin');
+      expect(callback).toHaveBeenCalledWith(null, path.sep + path.join('usr', 'local', 'bin'));
     });
 
     it('should call callback with error if binaries path is not found', () => {

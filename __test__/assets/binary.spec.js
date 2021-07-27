@@ -1,6 +1,7 @@
 const fs = require('fs');
 const common = require('../../src/common');
 const verifyAndPlaceBinary = require('../../src/assets/binary');
+const path = require('path');
 
 jest.mock('fs');
 jest.mock('../../src/common');
@@ -33,7 +34,7 @@ describe('verifyAndPlaceBinary()', () => {
 
   it('should call callback with null on success', () => {
     fs.existsSync.mockReturnValueOnce(true);
-    common.getInstallationPath.mockImplementationOnce((cb) => cb(null, '/usr/local/bin'));
+    common.getInstallationPath.mockImplementationOnce((cb) => cb(null, path.sep + path.join('usr', 'local', 'bin')));
 
     verifyAndPlaceBinary('command', './bin', callback);
 
@@ -42,10 +43,10 @@ describe('verifyAndPlaceBinary()', () => {
 
   it('should move the binary to installation directory', () => {
     fs.existsSync.mockReturnValueOnce(true);
-    common.getInstallationPath.mockImplementationOnce((cb) => cb(null, '/usr/local/bin'));
+    common.getInstallationPath.mockImplementationOnce((cb) => cb(null, path.sep + path.join('usr', 'local', 'bin')));
 
     verifyAndPlaceBinary('command', './bin', callback);
 
-    expect(fs.renameSync).toHaveBeenCalledWith('bin/command', '/usr/local/bin/command');
+    expect(fs.renameSync).toHaveBeenCalledWith(path.join('bin', 'command'), path.sep + path.join('usr', 'local', 'bin', 'command'));
   });
 });

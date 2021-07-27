@@ -57,7 +57,7 @@ Here is the magic: You ask to run `go-npm install` after it completes installing
 
 Edit `package.json` file and add the following:
 ```
-{
+"scripts": {
     "postinstall": "go-npm install",
     "preuninstall": "go-npm uninstall",
 }

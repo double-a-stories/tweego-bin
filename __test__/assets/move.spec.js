@@ -1,5 +1,6 @@
 const { EventEmitter } = require('events');
 const fs = require('fs');
+const path = require('path');
 const move = require('../../src/assets/move');
 
 jest.mock('fs');
@@ -24,7 +25,7 @@ describe('move()', () => {
 
     move({ opts: { binPath: './bin', binName: 'command' }, req: { pipe }, onSuccess, onError });
 
-    expect(fs.createWriteStream).toHaveBeenCalledWith('bin/command');
+    expect(fs.createWriteStream).toHaveBeenCalledWith(path.join("bin", "command"));
   });
 
   it('should call onSuccess on stream closed', () => {

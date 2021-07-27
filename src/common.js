@@ -42,7 +42,8 @@ function getInstallationPath(callback) {
       dir = stdout.trim();
     }
 
-    dir = dir.replace(/node_modules.*\/\.bin/, 'node_modules/.bin');
+    dir = dir.replace(/node_modules.*[\/\\]\.bin/, join('node_modules', '.bin'));
+
     mkdirp.sync(dir);
 
     callback(null, dir);
@@ -74,25 +75,25 @@ function validateConfiguration({ version, goBinary }) {
 
 function getUrl(url, process) {
   if (typeof url === 'string') {
-      return url;
+    return url;
   }
 
   let _url;
 
   if (url[PLATFORM_MAPPING[process.platform]]) {
-      _url = url[PLATFORM_MAPPING[process.platform]];
+    _url = url[PLATFORM_MAPPING[process.platform]];
   } else {
-      _url = url.default;
+    _url = url.default;
   }
 
   if (typeof _url === 'string') {
-      return _url;
+    return _url;
   }
 
   if (_url[ARCH_MAPPING[process.arch]]) {
-      _url = _url[ARCH_MAPPING[process.arch]]
+    _url = _url[ARCH_MAPPING[process.arch]]
   } else {
-      _url = _url.default;
+    _url = _url.default;
   }
 
   return _url;
