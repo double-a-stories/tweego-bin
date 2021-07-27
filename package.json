@@ -1,6 +1,6 @@
 {
   "name": "@gzuidhof/go-npm",
-  "version": "0.1.9",
+  "version": "0.1.11",
   "description": "Distribute and install Go binaries via NPM",
   "main": "index.js",
   "bin": {
@@ -15,7 +15,7 @@
   "dependencies": {
     "mkdirp": "^1.0.4",
     "request": "^2.88.2",
-    "tar": "^6.1.2",
+    "tar": "^2.2.2",
     "unzipper": "0.10.10"
   },
   "repository": {
