@@ -1,6 +1,6 @@
 {
   "name": "@gzuidhof/go-npm",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "description": "Distribute and install Go binaries via NPM",
   "main": "index.js",
   "bin": {
@@ -8,24 +8,22 @@
   },
   "scripts": {
     "test": "jest",
-    "prepublish": "node node_modules/@babel/cli/bin/babel.js src --out-dir bin --presets=@babel/preset-env"
+    "build": "rm -rf ./bin && esbuild --bundle src/index.js --outfile=\"./bin/index.js\" --platform=node --target=es6 --minify-whitespace",
+    "prepublishOnly": "npm i && npm run build"
   },
   "author": "Sanath Kumar Ramesh <dayanandasaraswati@gmail.com>",
   "license": "Apache-2.0",
-  "dependencies": {
-    "mkdirp": "^1.0.4",
-    "request": "^2.88.2",
-    "tar": "^2.2.2",
-    "unzipper": "0.10.10"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/gzuidhof/go-npm.git"
   },
   "homepage": "https://github.com/gzuidhof/go-npm",
   "devDependencies": {
-    "@babel/cli": "^7.14.8",
-    "@babel/preset-env": "^7.14.8",
-    "jest": "^24.5.0"
+    "esbuild": "^0.12.17",
+    "jest": "^24.5.0",
+    "mkdirp": "^1.0.4",
+    "request": "^2.88.2",
+    "tar": "^2.2.2",
+    "unzipper": "0.10.10"
   }
 }
