@@ -1,4 +1,11 @@
 ## Go NPM
+
+### (@gzuidhof): MODIFICATIONS FROM BASE `go-npm` PACKAGE
+* Support for zip and non-compressed binaries.
+* Added support for `arm64` architecture.
+* Fix for use on Windows platform (the binary would get placed in the wrong place for consumers).
+* Shipped as a bundle using `esbuild`, removing 70 packages of dependencies (including huge things like Babel). Now your users will only have to download one additional package (`@guidhof/go-npm`).
+
 ### Distribute cross-platform Go binaries via NPM
 
 Applications written in Golang are portable - you can easily cross-compile binaries that work on Windows, Mac, and Linux. But how do you distribute the binaries to customers? When you publish new releases, how do they update the binary?
