@@ -23,14 +23,14 @@ describe('move()', () => {
 
   it('should download resource to given binPath', () => {
 
-    move({ opts: { binPath: './bin', binName: 'command' }, req: { pipe }, onSuccess, onError });
+    move({ opts: { binPath: './bin', binName: 'command' }, res: { pipe }, onSuccess, onError });
 
     expect(fs.createWriteStream).toHaveBeenCalledWith(path.join("bin", "command"));
   });
 
   it('should call onSuccess on stream closed', () => {
 
-    move({ opts: { binPath: './bin', binName: 'command' }, req: { pipe }, onSuccess, onError });
+    move({ opts: { binPath: './bin', binName: 'command' }, res: { pipe }, onSuccess, onError });
 
     streamEvents.emit('close');
 
@@ -41,7 +41,7 @@ describe('move()', () => {
 
     const error = new Error();
 
-    move({ opts: { binPath: './bin', binName: 'command' }, req: { pipe }, onSuccess, onError });
+    move({ opts: { binPath: './bin', binName: 'command' }, res: { pipe }, onSuccess, onError });
 
     streamEvents.emit('error', error);
 

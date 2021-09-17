@@ -52,53 +52,53 @@ describe('common', () => {
 
   describe('getUrl', () => {
     it('should get url from given string url', () => {
-      const url = common.getUrl('http://url');
+      const url = common.getUrl('https://url');
 
-      expect(url).toEqual('http://url');
+      expect(url).toEqual('https://url');
     });
 
     it('should get specific url for current platform', () => {
       const url = common.getUrl({
-        default: 'http://url.tar.gz',
-        windows: 'http://url.exe.zip'
+        default: 'https://url.tar.gz',
+        windows: 'https://url.exe.zip'
       }, { platform: 'win32' });
 
-      expect(url).toEqual('http://url.exe.zip');
+      expect(url).toEqual('https://url.exe.zip');
     });
 
     it('should get default url for current platform', () => {
       const url = common.getUrl({
-        default: 'http://url.tar.gz',
-        windows: 'http://url.exe.zip'
+        default: 'https://url.tar.gz',
+        windows: 'https://url.exe.zip'
       }, { platform: 'linux' });
 
-      expect(url).toEqual('http://url.tar.gz');
+      expect(url).toEqual('https://url.tar.gz');
     });
 
     it('should get specific url for current platform and architecture', () => {
       const url = common.getUrl({
-        default: 'http://url.tar.gz',
-        windows: 'http://url.exe.zip',
-        darwin: {
-          default: 'http://url_darwin.tar.gz',
-          386: 'http://url_darwin_i386.tar.gz'
+        default: 'https://url.tar.gz',
+        windows: 'https://url.exe.zip',
+        macos: {
+          default: 'https://url_macos.tar.gz',
+          x86: 'https://url_macos_x86.tar.gz'
         }
-      }, { platform: 'darwin', arch: 'ia32' });
+      }, { platform: 'darwin', arch: 'x32' });
 
-      expect(url).toEqual('http://url_darwin_i386.tar.gz');
+      expect(url).toEqual('https://url_macos_x86.tar.gz');
     });
 
     it('should get default url for current platform and architecture', () => {
       const url = common.getUrl({
-        default: 'http://url.tar.gz',
-        windows: 'http://url.exe.zip',
-        darwin: {
-          default: 'http://url_darwin.tar.gz',
-          386: 'http://url_darwin_i386.tar.gz'
+        default: 'https://url.tar.gz',
+        windows: 'https://url.exe.zip',
+        macos: {
+          default: 'https://url_macos.tar.gz',
+          x86: 'https://url_macos_x86.tar.gz'
         }
-      }, { platform: 'darwin', arch: 'amd64' });
+      }, { platform: 'darwin', arch: 'x64' });
 
-      expect(url).toEqual('http://url_darwin.tar.gz');
+      expect(url).toEqual('https://url_macos.tar.gz');
     });
   });
 

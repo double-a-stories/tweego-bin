@@ -5,18 +5,15 @@ const mkdirp = require('mkdirp');
 
 // Mapping from Node's `process.arch` to Golang's `$GOARCH`
 const ARCH_MAPPING = {
-  ia32: '386',
-  x64: 'amd64',
-  arm: 'arm',
-  arm64: 'arm64'
+  x32: 'x86',
+  x64: 'x64',
 };
 
 // Mapping between Node's `process.platform` to Golang's
 const PLATFORM_MAPPING = {
-  darwin: 'darwin',
+  darwin: 'macos',
   linux: 'linux',
   win32: 'windows',
-  freebsd: 'freebsd'
 };
 
 function getInstallationPath(callback) {

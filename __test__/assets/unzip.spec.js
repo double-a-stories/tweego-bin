@@ -23,14 +23,14 @@ describe('unzip()', () => {
 
   it('should download resource and unzip to given binPath', () => {
 
-    unzip({ opts: { binPath: './bin', binName: 'command' }, req: { pipe }, onSuccess, onError });
+    unzip({ opts: { binPath: './bin', binName: 'command' }, res: { pipe }, onSuccess, onError });
 
     expect(unzipper.Extract).toHaveBeenCalledWith({ path: './bin' });
   });
 
   it('should call onSuccess on unzip close', () => {
 
-    unzip({ opts: { binPath: './bin', binName: 'command' }, req: { pipe }, onSuccess, onError });
+    unzip({ opts: { binPath: './bin', binName: 'command' }, res: { pipe }, onSuccess, onError });
 
     unzipEvents.emit('close');
 
@@ -41,7 +41,7 @@ describe('unzip()', () => {
 
     const error = new Error();
 
-    unzip({ opts: { binPath: './bin', binName: 'command' }, req: { pipe }, onSuccess, onError });
+    unzip({ opts: { binPath: './bin', binName: 'command' }, res: { pipe }, onSuccess, onError });
 
     unzipEvents.emit('error', error);
 

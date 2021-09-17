@@ -27,14 +27,14 @@ describe('untar()', () => {
 
   it('should download resource and untar to given binPath', () => {
 
-    untar({ opts: { binPath: './bin', binName: 'command' }, req: { pipe }, onSuccess, onError });
+    untar({ opts: { binPath: './bin', binName: 'command' }, res: { pipe }, onSuccess, onError });
 
     expect(tar.Extract).toHaveBeenCalledWith({ path: './bin' });
   });
 
   it('should call onSuccess on untar end', () => {
 
-    untar({ opts: { binPath: './bin', binName: 'command' }, req: { pipe }, onSuccess, onError });
+    untar({ opts: { binPath: './bin', binName: 'command' }, res: { pipe }, onSuccess, onError });
 
     untarEvents.emit('end');
 
@@ -45,7 +45,7 @@ describe('untar()', () => {
 
     const error = new Error();
 
-    untar({ opts: { binPath: './bin', binName: 'command' }, req: { pipe }, onSuccess, onError });
+    untar({ opts: { binPath: './bin', binName: 'command' }, res: { pipe }, onSuccess, onError });
 
     ungzEvents.emit('error', error);
 
@@ -56,7 +56,7 @@ describe('untar()', () => {
 
     const error = new Error();
 
-    untar({ opts: { binPath: './bin', binName: 'command' }, req: { pipe }, onSuccess, onError });
+    untar({ opts: { binPath: './bin', binName: 'command' }, res: { pipe }, onSuccess, onError });
 
     untarEvents.emit('error', error);
 

@@ -35,7 +35,7 @@ function install(callback) {
   console.log('Downloading from URL: ' + opts.url);
 
   const req = request(opts.url);
-  req.end();
+  if (req.end) req.end();
 
   req.on('error', () => callback('Error downloading from URL: ' + opts.url));
   req.on('response', (res) => {

@@ -1,5 +1,4 @@
 const { EventEmitter } = require('events');
-const request = require('request');
 const common = require('../../src/common');
 const install = require('../../src/actions/install');
 const move = require('../../src/assets/move');
@@ -9,12 +8,14 @@ const verifyAndPlaceCallback = require('../../src/assets/binary');
 
 jest.mock('fs');
 jest.mock('mkdirp');
-jest.mock('request');
+jest.mock('follow-redirects');
 jest.mock('../../src/common');
 jest.mock('../../src/assets/move');
 jest.mock('../../src/assets/untar');
 jest.mock('../../src/assets/unzip');
 jest.mock('../../src/assets/binary');
+
+const { request } = require('follow-redirects').https;
 
 describe('install()', () => {
 
@@ -37,18 +38,18 @@ describe('install()', () => {
 
   it('should call callback with error on request error', () => {
     request.mockReturnValueOnce(requestEvents);
-    common.parsePackageJson.mockReturnValueOnce({ url: 'http://url' });
+    common.parsePackageJson.mockReturnValueOnce({ url: 'https://url' });
 
     install(callback);
 
     requestEvents.emit('error');
 
-    expect(callback).toHaveBeenCalledWith('Error downloading from URL: http://url');
+    expect(callback).toHaveBeenCalledWith('Error downloading from URL: https://url');
   });
 
   it('should call callback with error on response with status code different than 200', () => {
     request.mockReturnValueOnce(requestEvents);
-    common.parsePackageJson.mockReturnValueOnce({ url: 'http://url' });
+    common.parsePackageJson.mockReturnValueOnce({ url: 'https://url' });
 
     install(callback);
 
@@ -59,7 +60,7 @@ describe('install()', () => {
 
   it('should pick move strategy if url is an uncompressed binary', () => {
     request.mockReturnValueOnce(requestEvents);
-    common.parsePackageJson.mockReturnValueOnce({ url: 'http://url' });
+    common.parsePackageJson.mockReturnValueOnce({ url: 'https://url' });
 
     install(callback);
 
@@ -70,7 +71,7 @@ describe('install()', () => {
 
   it('should pick untar strategy if url ends with .tar.gz', () => {
     request.mockReturnValueOnce(requestEvents);
-    common.parsePackageJson.mockReturnValueOnce({ url: 'http://url.tar.gz' });
+    common.parsePackageJson.mockReturnValueOnce({ url: 'https://url.tar.gz' });
 
     install(callback);
 
@@ -81,7 +82,7 @@ describe('install()', () => {
 
   it('should pick unzip strategy if url ends with .zip', () => {
     request.mockReturnValueOnce(requestEvents);
-    common.parsePackageJson.mockReturnValueOnce({ url: 'http://url.zip' });
+    common.parsePackageJson.mockReturnValueOnce({ url: 'https://url.zip' });
 
     install(callback);
 
@@ -92,7 +93,7 @@ describe('install()', () => {
 
   it('should call verifyAndPlaceCallback on success', () => {
     request.mockReturnValueOnce(requestEvents);
-    common.parsePackageJson.mockReturnValueOnce({ url: 'http://url', binName: 'command', binPath: './bin' });
+    common.parsePackageJson.mockReturnValueOnce({ url: 'https://url', binName: 'command', binPath: './bin' });
     move.mockImplementationOnce(({ onSuccess }) => onSuccess());
 
     install(callback);
