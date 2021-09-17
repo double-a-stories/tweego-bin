@@ -2,7 +2,6 @@ const { EventEmitter } = require('events');
 const common = require('../../src/common');
 const install = require('../../src/actions/install');
 const move = require('../../src/assets/move');
-const untar = require('../../src/assets/untar');
 const unzip = require('../../src/assets/unzip');
 const verifyAndPlaceCallback = require('../../src/assets/binary');
 
@@ -11,7 +10,6 @@ jest.mock('mkdirp');
 jest.mock('follow-redirects');
 jest.mock('../../src/common');
 jest.mock('../../src/assets/move');
-jest.mock('../../src/assets/untar');
 jest.mock('../../src/assets/unzip');
 jest.mock('../../src/assets/binary');
 
@@ -67,17 +65,6 @@ describe('install()', () => {
     requestEvents.emit('response', { statusCode: 200 });
 
     expect(move).toHaveBeenCalled();
-  });
-
-  it('should pick untar strategy if url ends with .tar.gz', () => {
-    request.mockReturnValueOnce(requestEvents);
-    common.parsePackageJson.mockReturnValueOnce({ url: 'https://url.tar.gz' });
-
-    install(callback);
-
-    requestEvents.emit('response', { statusCode: 200 });
-
-    expect(untar).toHaveBeenCalled();
   });
 
   it('should pick unzip strategy if url ends with .zip', () => {
