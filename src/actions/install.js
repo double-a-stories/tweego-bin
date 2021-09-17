@@ -1,5 +1,5 @@
 const mkdirp = require('mkdirp');
-const request = require('request');
+const { request } = require('follow-redirects').https;
 const { parsePackageJson } = require('../common');
 const verifyAndPlaceBinary = require('../assets/binary');
 
@@ -34,7 +34,8 @@ function install(callback) {
 
   console.log('Downloading from URL: ' + opts.url);
 
-  const req = request({ uri: opts.url });
+  const req = request(opts.url);
+  req.end();
 
   req.on('error', () => callback('Error downloading from URL: ' + opts.url));
   req.on('response', (res) => {
@@ -44,7 +45,7 @@ function install(callback) {
 
       strategy({
           opts,
-          req,
+          res,
           onSuccess: () => verifyAndPlaceBinary(opts.binName, opts.binPath, callback),
           onError: callback
       });

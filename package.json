@@ -25,5 +25,7 @@
     "request": "^2.88.2",
     "tar": "^2.2.2",
     "unzipper": "0.10.10"
+  "dependencies": {
+    "follow-redirects": "^1.14.4"
   }
 }

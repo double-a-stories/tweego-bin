@@ -6,14 +6,13 @@ const unzipper = require('unzipper');
  * Once unzip is completed, binary is downloaded into `binPath`.
  * Verify the binary and call it good.
  */
-function unzip({ opts, req, onSuccess, onError }) {
+function unzip({ opts, res, onSuccess, onError }) {
 
   const unzip = unzipper.Extract({ path: opts.binPath });
 
   unzip.on('error', onError);
   unzip.on('close', onSuccess);
-
-  req.pipe(unzip);
+  res.pipe(unzip);
 }
 
 module.exports = unzip;
