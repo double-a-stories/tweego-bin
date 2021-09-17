@@ -2,16 +2,16 @@
   "name": "tweego-bin",
   "version": "0.1.0",
   "description": "Distribute and install Go binaries via NPM",
-  "main": "index.js",
+  "main": "dist/index.js",
   "bin": {
     "go-npm": "./bin/index.js"
   },
   "scripts": {
     "test": "jest",
-    "build": "rm -rf ./bin && esbuild --bundle src/index.js --outfile=\"./bin/index.js\" --platform=node --target=es6 --minify-whitespace",
+    "build": "rm -rf ./dist && esbuild --bundle src/index.js --outfile=\"./dist/index.js\" --platform=node --target=es6 --minify-whitespace",
     "prepublishOnly": "npm i && npm run build",
-    "postinstall": "node ./bin/index install",
-    "preuninstall": "node ./bin/index uninstall"
+    "postinstall": "node ./dist/index install",
+    "preuninstall": "node ./dist/index uninstall"
   },
   "author": "double-a-stories",
   "license": "Apache-2.0",
@@ -29,7 +29,7 @@
   },
   "goBinary": {
     "name": "tweego",
-    "path": "./tweego",
+    "path": "./bin",
     "url": "https://github.com/tmedwards/tweego/releases/download/v2.1.1/tweego-2.1.1-{{platform}}-{{arch}}.zip"
   },
   "dependencies": {
