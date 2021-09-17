@@ -13,6 +13,7 @@ function uninstall(callback) {
 
       try {
           unlinkSync(join(installationPath, binName));
+          unlinkSync(join(installationPath, "storyformats"));
       } catch(ex) {
           // Ignore errors when deleting the file.
       }
