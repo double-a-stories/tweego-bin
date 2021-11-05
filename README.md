@@ -1,12 +1,12 @@
 ## tweego-bin
 
-![https://www.npmjs.com/package/tweego-bin](https://shields.io/npm/v/tweego-bin?style=for-the-badge)
+[![NPM badge](https://shields.io/npm/v/tweego-bin?style=for-the-badge)](https://www.npmjs.com/package/tweego-bin)
 
 An unofficial NPM wrapper for the [Tweego](https://www.motoslave.net/tweego/) compiler by [@tmedwards](https://github.com/tmedwards/tweego).
 
 Similar to <https://github.com/mattrossman/tweego-node>, but requires no dependencies or NodeJS wrappers.
 
-On installation, downloads the release ZIP for your system, and extracts it to `bin/`. NPM will create symlinks `bin/tweego` and `bin/storyformats` inside the folder located at `$(npm bin)` or `$(npm bin -g)`.
+On installation, downloads the release ZIP for your system, and extracts it to `bin/`. NPM will create a symlink to `tweego` and `storyformats` inside the folder located at `$(npm bin)` or `$(npm bin -g)`.
 
 ### How to use
 
