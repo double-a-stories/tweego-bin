@@ -1,117 +1,48 @@
-## Go NPM
+## tweego-bin
 
-### (@gzuidhof): MODIFICATIONS FROM BASE `go-npm` PACKAGE
-* Support for zip and non-compressed binaries.
-* Added support for `arm64` architecture.
-* Fix for use on Windows platform (the binary would get placed in the wrong place for consumers).
-* Shipped as a bundle using `esbuild`, removing 70 packages of dependencies (including huge things like Babel). Now your users will only have to download one additional package (`@guidhof/go-npm`).
+An unofficial NPM wrapper for the [Tweego](https://www.motoslave.net/tweego/) compiler by [@tmedwards](https://github.com/tmedwards/tweego).
 
-### Distribute cross-platform Go binaries via NPM
+Similar to <https://github.com/mattrossman/tweego-node>, but requires no dependencies or NodeJS wrappers.
 
-Applications written in Golang are portable - you can easily cross-compile binaries that work on Windows, Mac, and Linux. But how do you distribute the binaries to customers? When you publish new releases, how do they update the binary?
+On installation, downloads the release ZIP for your system, and extracts it to `bin/`. NPM will create symlinks `bin/tweego` and `bin/storyformats` inside the folder located at `$(npm bin)` or `$(npm bin -g)`.
 
-**Use NPM to distribute cross-platform Go binaries**
+### How to use
 
-## Kidding me! Why NPM?
-* **Cross-platform**: NPM is the only popular package manager that works cross-platform.
-* **Lower barier to entry**: Most developers have NPM installed already.
-* **Pain free publishing**: It just takes one command to publish - `npm publish`
-* **Dead simple install & update story**: `npm install/update -g your-awesome-app`
-* **Adds $PATH**: NPM will automatically add your binary location to $PATH and generate .cmd file for Windows. Your app just works after installation!
+Global installation: This will allow you to use `tweego` as a shell command.
 
-## Okay, tell me how?
-### 1. Publish your binaries
-Setup your Go application to compile and publish binaries to a file server. This could be Github Releases or Amazon S3 or even Dropbox. All you need is a link.
-
-I like to use [GoReleaser](https://github.com/goreleaser/goreleaser) to setup by release process. You create a simple YAML configuration file like this and run `goreleaser` CLI to publish binaries for various platform/architecture combination to Github:
-
-```
-# .goreleaser.yml
-# Build customization
-builds:
-  - binary: drum-roll
-    goos:
-      - windows
-      - darwin
-      - linux
-    goarch:
-      - amd64
+```sh
+# Install
+npm install --global tweego-bin
+# Check that it worked.
+tweego -v
 ```
 
-`go-npm` will pull the appropriate binary for the platform & architecture where the package is being installed.
-
-### 2. Create a package.json file for your NPM app
-To publish to NPM, you need to create a `package.json` file. You give your application a name, link to Readme, Github repository etc, and more importantly add `go-npm` as a dependency. You can create this file in an empty directory in your project or in a separate Git repository altogether. It is your choice.
-
-**Create package.json**
-
-`$ npm init`
-
-Answer the questions to create an initial package.json file
-
-**Add go-npm dependency**
-
-From the directory containing package.json file, do
-
-`$ npm install go-npm --save`
-
-This will install go-npm under to your package.json file. It will also create a `node_modules` directory where the `go-npm` package is downloaded. You don't need this directory since you are only going to publish the module and not consume it yourself. Let's go ahead and delete it.
-
-`$ rm -r node_modules`
-
-**Add postinstall and preuninstall scripts**
-Here is the magic: You ask to run `go-npm install` after it completes installing your package. This will pull down binaries from Github or Amazon S3 and install in NPM's `bin` directory. Binaries under bin directory are immediately available for use in your Terminal.
-
-Edit `package.json` file and add the following:
-```
-"scripts": {
-    "postinstall": "go-npm install",
-    "preuninstall": "go-npm uninstall",
-}
+Project-level installation: allows using Tweego inside scripts in package.json.
+```sh
+# Install
+npm install --save-dev tweego-bin
+# Check that it worked.
+npm exec -c 'tweego -v'
 ```
 
-`go-npm uninstall` simply deletes the binary from `bin` directory before NPM uninstalls your package.
+See the [official Tweego docs](https://www.motoslave.net/tweego/docs/) for using Tweego.
 
-**Configure your binary path**
+### Current limitations
 
-You need to tell `go-npm` where to download the binaries from, and where to install them. Edit `package.json` file and add the following configuration.
+* Builds are only available for x64 and x84 Windows, macOS, and Linux.
+    * If you're on an ARM64 Mac, you'll either need to build Tweego from source, or try running this in `x86_64` mode.
+* The executable on Windows will be named `tweego` instead of `tweego.exe`. Not sure if this actually works there yet.
 
-```
-"goBinary": {
-      "name": "command-name",
-      "path": "./bin",
-      "url": "https://github.com/user/my-go-package/releases/download/v{{version}}/myGoPackage_{{version}}_{{platform}}_{{arch}}.tar.gz"
-```
+### License
 
-* *name*: Name of the command users will use to run your binary.
-* *path*: Temporary path where binaries will be downloaded to
-* *url*: HTTP Web server where binaries are hosted.
+Copyright 2021 Double-A
 
-Following variables are available to customize the URL:
-* `{{version}}`: Version number read from  `package.json` file. When you publish your package to NPM, it will use this version number. Ex: 0.0.1
-* `{{platform}}`: `$GOOS` value for the platform
-* `{{arch}}`: `$GOARCH` value for the architecture
-* `{{ win_ext }}`: optional `.exe` extension for windows assets.
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at <http://www.apache.org/licenses/LICENSE-2.0>
 
-If you use `goreleaser` to publish your modules, it will automatically set the right architecture & platform in your URL.
-
-**Publish to NPM**
-
-All that's left now is publish to NPM. As I promised before, just one command
-
-`$ npm publish`
-
-### 3. Distribute to users
-
-To install:
-
-`npm install -g your-app-name`
-
-To Update:
-
-`npm update -g your-app-name`
-
-
----
-
-With ❤️ to the community by [Sanath Kumar Ramesh](http://twitter.com/sanathkr_)
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.

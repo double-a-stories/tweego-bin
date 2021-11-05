@@ -1,38 +1,35 @@
 {
   "name": "tweego-bin",
-  "version": "0.1.0",
-  "description": "Distribute and install Go binaries via NPM",
-  "main": "dist/index.js",
-  "bin": {
-    "go-npm": "./bin/index.js"
-  },
-  "scripts": {
-    "test": "jest",
-    "build": "rm -rf ./dist && esbuild --bundle src/index.js --outfile=\"./dist/index.js\" --platform=node --target=es6 --minify-whitespace",
-    "prepublishOnly": "npm i && npm run build",
-    "postinstall": "node ./dist/index install",
-    "preuninstall": "node ./dist/index uninstall"
-  },
   "author": "double-a-stories",
   "license": "Apache-2.0",
+  "version": "0.1.2",
+  "description": "Distribute and install Go binaries via NPM",
+  "bin": {
+    "tweego": "bin/tweego",
+    "storyformats": "bin/storyformats"
+  },
+  "cpu": [
+    "x64",
+    "ia32"
+  ],
+  "os": [
+    "win32",
+    "linux",
+    "darwin"
+  ],
+  "scripts": {
+    "build": "rm -rf ./dist && esbuild --bundle src/install_tweego.js --outfile=\"./dist/install.js\" --platform=node --target=es6 --minify-whitespace",
+    "prepack": "npm run build",
+    "preinstall": "node ./dist/install.js"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/double-a-stories/tweego-bin.git"
   },
   "homepage": "https://github.com/double-a-stories/tweego-bin",
   "devDependencies": {
+    "axios": "^0.24.0",
     "esbuild": "^0.12.17",
-    "jest": "^24.5.0",
-    "mkdirp": "^1.0.4",
-    "request": "^2.88.2",
     "unzipper": "0.10.10"
-  },
-  "goBinary": {
-    "name": "tweego",
-    "path": "./bin",
-    "url": "https://github.com/tmedwards/tweego/releases/download/v2.1.1/tweego-2.1.1-{{platform}}-{{arch}}.zip"
-  },
-  "dependencies": {
-    "follow-redirects": "^1.14.4"
   }
 }
