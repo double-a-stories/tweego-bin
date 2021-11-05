@@ -3,6 +3,7 @@
 // A simple script to download Tweego and unzip it into ./bin
 const axios = require('axios'); // needed for making HTTPS requests which follow GitHub's redirects
 const unzipper = require('unzipper');
+const fs = require('fs');
 
 //////////////////////////////////////////////
 // Determine download URL based on platform //
@@ -76,3 +77,6 @@ async function unzipResponse(res, destinationDir) {
 }
 
 downloadTweego("bin/"); // places tweego files into bin/
+if (fs.existsSync("bin/tweego.exe")) {
+  fs.renameSync("bin/tweego.exe", "bin/tweego");
+}
