@@ -14,7 +14,7 @@ Global installation: This will allow you to use `tweego` as a shell command.
 # Install
 npm install --global tweego-bin
 # Check that it worked.
-tweego -v
+tweego --list-formats
 ```
 
 Project-level installation: allows using Tweego inside scripts in package.json.
@@ -22,7 +22,7 @@ Project-level installation: allows using Tweego inside scripts in package.json.
 # Install
 npm install --save-dev tweego-bin
 # Check that it worked.
-npm exec -c 'tweego -v'
+npm exec -c 'tweego --list-formats'
 ```
 
 See the [official Tweego docs](https://www.motoslave.net/tweego/docs/) for using Tweego.
@@ -32,6 +32,8 @@ See the [official Tweego docs](https://www.motoslave.net/tweego/docs/) for using
 * Builds are only available for x64 and x84 Windows, macOS, and Linux.
     * If you're on an ARM64 Mac, you'll either need to build Tweego from source, or try running this in `x86_64` mode.
 * The executable on Windows will be named `tweego` instead of `tweego.exe`. Not sure if this actually works there yet.
+* Stream-based unzipping is unexpectedly slow on some platforms.
+    * Might be wise to fully download the file, then unzip.
 
 ### License
 
