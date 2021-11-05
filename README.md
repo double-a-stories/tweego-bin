@@ -1,5 +1,7 @@
 ## tweego-bin
 
+![https://www.npmjs.com/package/tweego-bin](https://shields.io/npm/v/tweego-bin?style=for-the-badge)
+
 An unofficial NPM wrapper for the [Tweego](https://www.motoslave.net/tweego/) compiler by [@tmedwards](https://github.com/tmedwards/tweego).
 
 Similar to <https://github.com/mattrossman/tweego-node>, but requires no dependencies or NodeJS wrappers.
