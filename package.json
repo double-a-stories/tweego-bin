@@ -18,7 +18,7 @@
     "darwin"
   ],
   "scripts": {
-    "build": "rm -rf ./dist && esbuild --bundle src/install_tweego.js --outfile=\"./dist/install.js\" --platform=node --target=es6 --minify-whitespace",
+    "build": "esbuild --bundle src/install_tweego.js --outfile=\"./dist/install.js\" --platform=node --target=es6 --minify-whitespace",
     "prepack": "npm run build",
     "postinstall": "node ./dist/install.js"
   },
