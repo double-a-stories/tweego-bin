@@ -3,4 +3,4 @@ node_modules
 src
 __test__
 example/
-bin
+bin/**
