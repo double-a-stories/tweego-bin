@@ -27,14 +27,15 @@ npm exec -c 'tweego --list-formats'
 
 See the [official Tweego docs](https://www.motoslave.net/tweego/docs/) for using Tweego.
 
-### Current limitations
+### Known issues
 
+* On a global Windows install, NPM may create a non-functioning PowerShell shim called `tweego.ps1`.
+    * To remove the broken shim, invoke `Remove-Item (Join-Path (npm bin -g) "\tweego.ps1")`.
 * Builds are only available for x64 and x84 Windows, macOS, and Linux.
     * If you're on an ARM64 Mac, you'll either need to build Tweego from source, or try running this in `x86_64` mode.
 * The executable on Windows will be named `tweego` instead of `tweego.exe`. Not sure if this actually works there yet.
 * Stream-based unzipping is unexpectedly slow on some platforms.
     * Might be wise to fully download the file, then unzip.
-
 ### License
 
 Copyright 2021 Double-A
