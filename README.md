@@ -1,6 +1,8 @@
 ## tweego-bin
 
 [![NPM badge](https://shields.io/npm/v/tweego-bin?style=for-the-badge)](https://www.npmjs.com/package/tweego-bin)
+[![License MIT-0](https://img.shields.io/badge/license-MIT--0-red)](LICENSE)
+
 
 An unofficial NPM wrapper for the [Tweego](https://www.motoslave.net/tweego/) compiler by [@tmedwards](https://github.com/tmedwards/tweego).
 
@@ -39,14 +41,6 @@ See the [official Tweego docs](https://www.motoslave.net/tweego/docs/) for using
 
 ### License
 
-Copyright 2021, 2022 Double-A
+Copyright (c) 2021, 2022 Double-A
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at <http://www.apache.org/licenses/LICENSE-2.0>
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
+Licensed under the [MIT No Attribution (MIT-0) license](https://github.com/aws/mit-0).

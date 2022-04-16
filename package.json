@@ -1,7 +1,7 @@
 {
   "name": "tweego-bin",
   "author": "double-a-stories",
-  "license": "Apache-2.0",
+  "license": "MIT-0",
   "version": "0.3.4",
   "description": "Distribute and install Go binaries via NPM",
   "bin": {
