@@ -2,7 +2,7 @@
   "name": "tweego-bin",
   "author": "double-a-stories",
   "license": "Apache-2.0",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Distribute and install Go binaries via NPM",
   "bin": {
     "tweego": "bin/tweego",
@@ -14,7 +14,7 @@
     "darwin"
   ],
   "scripts": {
-    "build": "esbuild --bundle src/install.mjs --outfile=\"./dist/install.mjs\" --platform=node --target=node12 --minify-whitespace",
+    "build": "esbuild --bundle src/install.mjs --outfile=\"./dist/install.js\" --platform=node --target=node12 --minify-whitespace",
     "prepack": "npm run build && rm -rf bin/",
     "postinstall": "node ./dist/install.js"
   },
