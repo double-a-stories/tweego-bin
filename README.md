@@ -1,7 +1,7 @@
 ## tweego-bin
 
 [![NPM badge](https://shields.io/npm/v/tweego-bin?style=for-the-badge)](https://www.npmjs.com/package/tweego-bin)
-[![License MIT-0](https://img.shields.io/badge/license-MIT--0-red)](LICENSE)
+[![License MIT-0](https://img.shields.io/badge/license-MIT--0-red?style=for-the-badge)](LICENSE)
 
 
 An unofficial NPM wrapper for the [Tweego](https://www.motoslave.net/tweego/) compiler by [@tmedwards](https://github.com/tmedwards/tweego).
